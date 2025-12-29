@@ -441,27 +441,28 @@
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
             // SISTEMA INTELIGENTE DE IMAGEM
-            const [heroImgSrc, setHeroImgSrc] = useState('imagem/foto.jpg');
+         // SISTEMA INTELIGENTE DE IMAGEM
+const [heroImgSrc, setHeroImgSrc] = useState('imagem/foto.jpg');
+const [heroImgRetry, setHeroImgRetry] = useState(0);
 
-            const [heroImgRetry, setHeroImgRetry] = useState(0);
+const handleImgError = (e) => {
+    const attempts = [
+        'imagem/foto.jpg',
+        'imagem/foto.png',
+        'imagem/foto.jpeg',
+        'imagem/foto.JPG'
+    ];
 
-            const handleImgError = (e) => {
-                const attempts = [
-                    'foto.jpg.png',   
-                    'foto.png',       
-                    'foto.jpeg',
-                    'foto.jpg.jpg',
-                    'foto.JPG'
-                ];
+    if (heroImgRetry < attempts.length) {
+        console.log('Tentando imagem:', attempts[heroImgRetry]);
+        setHeroImgSrc(attempts[heroImgRetry]);
+        setHeroImgRetry(prev => prev + 1);
+    } else {
+        console.error('Nenhuma imagem encontrada na pasta /imagem');
+        e.target.style.display = 'none';
+    }
+};
 
-                if (heroImgRetry < attempts.length) {
-                    console.log(`Tentando imagem alternativa: ${attempts[heroImgRetry]}`);
-                    setHeroImgSrc(attempts[heroImgRetry]);
-                    setHeroImgRetry(prev => prev + 1);
-                } else {
-                    e.target.style.display = 'none';
-                }
-            };
 
             useEffect(() => {
                 const handleScroll = () => setScrolled(window.scrollY > 50);
