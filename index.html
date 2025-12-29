@@ -442,27 +442,13 @@
 
             // SISTEMA INTELIGENTE DE IMAGEM
          // SISTEMA INTELIGENTE DE IMAGEM
+// IMAGEM HERO (GitHub Pages)
 const [heroImgSrc, setHeroImgSrc] = useState('imagem/foto.png');
-const [heroImgRetry, setHeroImgRetry] = useState(0);
 
 const handleImgError = (e) => {
-    const attempts = [
-        'imagem/foto.jpg',
-        'imagem/foto.png',
-        'imagem/foto.jpeg',
-        'imagem/foto.JPG'
-    ];
-
-    if (heroImgRetry < attempts.length) {
-        console.log('Tentando imagem:', attempts[heroImgRetry]);
-        setHeroImgSrc(attempts[heroImgRetry]);
-        setHeroImgRetry(prev => prev + 1);
-    } else {
-        console.error('Nenhuma imagem encontrada na pasta /imagem');
-        e.target.style.display = 'none';
-    }
+    console.error('Imagem não encontrada em /imagem/foto.png');
+    e.target.style.display = 'none';
 };
-
 
             useEffect(() => {
                 const handleScroll = () => setScrolled(window.scrollY > 50);
